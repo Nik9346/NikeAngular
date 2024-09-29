@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { IShoes, IShoesSelected } from '../../models/shoes-interface.models';
+import { IShoes, IShoesDb, IShoesSelected } from '../../models/shoes-interface.models';
 import { ShoesService } from '../../services/shoes.service';
 import { AuthService } from '../../services/auth.service';
+import { IShoesCartDb } from '../../models/cart.inteface';
 
 @Component({
   selector: 'app-best-seller',
@@ -13,19 +14,18 @@ export class BestSellerComponent {
   isLoggedIn : boolean
   user: string
   cartVisible: boolean = false
-  shoesSelectedArray:IShoesSelected[] = []
+  shoesSelectedArray:IShoesCartDb[] = []
   
   constructor(private shoesService: ShoesService, private authService: AuthService) {
     this.isLoggedIn = this.authService.isLoggedIn
     if(this.isLoggedIn){
-    this.user = this.shoesService.user}
+    this.user = this.shoesService.utente.profilo.username}
     this.shoesSelectedArray = this.shoesService.shoesSelectedArray
-    
 
     // Chiamata verso il database e relativo filtro degli elementi
     this.shoesService.getShoes().subscribe((response) => {
        response.forEach((element) => {
-         if (element.best_seller >= 4) {
+         if (element.bestSeller >= 4) {
            this.best_seller.push(element)
          }
        })

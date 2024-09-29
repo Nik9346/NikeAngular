@@ -3,6 +3,7 @@ import { ShoesService } from '../../services/shoes.service';
 import { IShoes, IShoesSelected } from '../../models/shoes-interface.models';
 import { ActivatedRoute } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import { IShoesCartDb } from '../../models/cart.inteface';
 
 @Component({
   selector: 'app-category',
@@ -16,29 +17,14 @@ export class CategoryComponent {
   isLoggedIn: boolean
   user: string
   cartVisible: boolean = false
-  shoesSelectedArray:IShoesSelected[] = []
+  shoesSelectedArray:IShoesCartDb[] = []
 
   constructor(private shoesService: ShoesService, private activeRouter: ActivatedRoute, private authService: AuthService) {
     this.isLoggedIn = this.authService.isLoggedIn
     if(this.isLoggedIn){
-      this.user = this.shoesService.user
+      this.user = this.shoesService.utente.profilo.username
     }
     this.shoesSelectedArray = this.shoesService.shoesSelectedArray
-    // Vecchio metodo
-    // this.shoesService.getShoes().subscribe((response) => {
-    //   this.shoes = response
-    //   this.activeRouter.params.subscribe((params) => {
-    //     this.catOfShoes = params.productCategory
-    //     this.shoesCategory = []
-    //     this.shoes.forEach(element => {
-    //       if (element.categoria == this.catOfShoes) {
-    //         this.shoesCategory.push(element)
-    //       }
-    //     });
-    //   })
-    // });
-
-    // Codice Ottimizzato
     this.activeRouter.params.subscribe((params)=>{
       this.catOfShoes = params.productCategory
       this.shoesService.getShoesByCat(this.catOfShoes).subscribe((response)=>{
@@ -46,6 +32,7 @@ export class CategoryComponent {
       })
     })
   }
+  
   // Funzioni utilizzate per visualizzare il carrello
   viewCart() {
     this.cartVisible = true

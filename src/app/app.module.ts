@@ -32,6 +32,9 @@ import { AuthComponent } from './pages/auth/auth.component';
 import { AuthFormComponent } from './components/auth-form/auth-form.component';
 import { RegisterFormComponent } from './components/register-form/register-form.component';
 import { OrdiniComponent } from './pages/ordini/ordini.component';
+import { ManageShoesComponent } from './pages/manage-shoes/manage-shoes.component';
+import { RegisterDbFormComponent } from './components/register-db-form/register-db-form.component';
+import { ModalComponent } from './components/modal/modal.component';
 
 
 
@@ -66,6 +69,9 @@ import { OrdiniComponent } from './pages/ordini/ordini.component';
     AuthFormComponent,
     RegisterFormComponent,
     OrdiniComponent,
+    ManageShoesComponent,
+    RegisterDbFormComponent,
+    ModalComponent,
 
   ],
   imports: [

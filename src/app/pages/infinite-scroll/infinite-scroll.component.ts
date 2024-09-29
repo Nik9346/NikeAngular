@@ -3,6 +3,7 @@ import { PaginationService } from '../../services/pagination.service';
 import { IShoes, IShoesSelected } from '../../models/shoes-interface.models';
 import { AuthService } from '../../services/auth.service';
 import { ShoesService } from '../../services/shoes.service';
+import { IShoesCartDb } from '../../models/cart.inteface';
 
 
 @Component({
@@ -20,7 +21,7 @@ export class InfiniteScrollComponent implements OnInit {
   isLoggedIn: boolean;
   user: string;
   cartVisible: boolean = false
-  shoesSelectedArray: IShoesSelected[] = []
+  shoesSelectedArray: IShoesCartDb[] = []
 
   constructor(private infiniteScrollService: PaginationService, private authService: AuthService, private shoesService: ShoesService) { }
 
@@ -29,7 +30,7 @@ export class InfiniteScrollComponent implements OnInit {
     this.loadData();
     this.isLoggedIn = this.authService.isLoggedIn
     if (this.isLoggedIn) {
-      this.user = this.shoesService.user
+      this.user = this.shoesService.utente.profilo.username
     }
     this.shoesSelectedArray = this.shoesService.shoesSelectedArray
   }

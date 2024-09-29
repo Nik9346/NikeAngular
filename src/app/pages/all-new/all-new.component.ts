@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { ShoesService } from '../../services/shoes.service';
-import { IShoes, IShoesSelected } from '../../models/shoes-interface.models';
+import { IShoes, IShoesDb, IShoesSelected } from '../../models/shoes-interface.models';
 import { AuthService } from '../../services/auth.service';
+import { IShoesCartDb } from '../../models/cart.inteface';
 
 @Component({
   selector: 'app-all-new',
@@ -14,13 +15,13 @@ export class AllNewComponent {
   isLoggedIn: boolean
   user: string
   cartVisible: boolean = false
-  shoesSelectedArray:IShoesSelected[] = []
+  shoesSelectedArray:IShoesCartDb[] = []
 
   constructor(private shoesService: ShoesService, private authService: AuthService) {
     this.shoesSelectedArray = this.shoesService.shoesSelectedArray
     this.isLoggedIn = this.authService.isLoggedIn
     if(this.isLoggedIn){
-    this.user = this.shoesService.user
+    this.user = this.shoesService.utente.profilo.username
     }
     this.shoesService.getNewShoes(this.isNew).subscribe((response) => {
       this.shoes = response

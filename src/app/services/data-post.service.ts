@@ -28,7 +28,6 @@ export class DataPostService {
      return this.http.get(`https://json-server-nikeangular.onrender.com/posts/?userId=${idUser}`, {headers})
   }
 
-  
   postProductData(token,idUser){
     const accessToken = token
     // data.userId = idUser
@@ -38,6 +37,10 @@ export class DataPostService {
     })
     // return this.http.get(`http://localhost:3000/users/${idUser}`, {headers})
     return this.http.get(`https://json-server-nikeangular.onrender.com/users/${idUser}`, {headers})
+  }
+
+  getProfiloByUsername(username:string){
+    return this.http.get(`http://localhost:8080/utente/username/${username}`)
   }
 
 }
